@@ -1,20 +1,22 @@
 //part|
 //Q1
 fun  String.replaceRepetative():String {
-    val newCharList= mutableListOf<Char>()
-    val x = this.lowercase().length
-    for (i in 0 until x-1 ) {
-        if (this.lowercase()[i] == this.lowercase()[i+1]){
-            newCharList.add('*')
-        }else if(this.lowercase()[i-1]=='*'){
-            newCharList.add('*')
-        }else if (i == x){
-            newCharList.add(this.lowercase()[i])
-        }else{
-            newCharList.add(this.lowercase()[i])
+ var count:Char? = null
+    var newString = this.lowercase()
+    for (i in 0 until this.lastIndex) {
+            if (count == this.lowercase()[i]){
+                newString = newString.replaceRange(i, i+1 , "*")
+            }else if (this.lowercase()[i] == this.lowercase()[i+1]){
+                newString = newString.replaceRange(i, i+1 , "*")
+            }
+            count = this[i]
+        }
+    if( this.last() == count){
+        if (count == newString.last()) {
+            newString = newString.dropLast(1)+"*"
         }
     }
-    return newCharList.toString()
+    return newString
 }
 
 //Q2
